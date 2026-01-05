@@ -1,0 +1,98 @@
+import { useState, useRef } from "react";
+import { createPortal } from "react-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Thumbs, FreeMode } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
+import "swiper/css/free-mode";
+import { FaTimes, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+
+export default function ImageModal({ images, initialIndex, title, onClose }) {
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+
+  return createPortal(
+    <div
+      className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <div
+        className="flex h-full w-full flex-col items-center justify-center px-4 relative"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close */}
+        <button
+          onClick={onClose}
+          className="absolute right-6 top-6 text-3xl text-white hover:opacity-80 z-20"
+        >
+          <FaTimes size={30} />
+        </button>
+
+        {/* Main Slider */}
+        <Swiper
+          modules={[Navigation, Thumbs]}
+          navigation={{
+            prevEl: prevRef.current,
+            nextEl: nextRef.current,
+          }}
+          onBeforeInit={(swiper) => {
+            swiper.params.navigation.prevEl = prevRef.current;
+            swiper.params.navigation.nextEl = nextRef.current;
+          }}
+          initialSlide={initialIndex}
+          thumbs={{ swiper: thumbsSwiper }}
+          className="w-full max-w-6xl relative"
+        >
+          {images.map((img, index) => (
+            <SwiperSlide key={index}>
+              <img
+                src={img}
+                alt={`${title} ${index + 1}`}
+                className="mx-auto max-h-[75vh] rounded-xl object-contain"
+              />
+            </SwiperSlide>
+          ))}
+
+          {/* Prev / Next سفارشی */}
+          <div
+            ref={prevRef}
+            className="absolute top-1/2 left-2 z-10 -translate-y-1/2 cursor-pointer text-white bg-black/50 p-2 rounded-full hover:bg-black/70"
+          >
+            <FaChevronLeft size={24} />
+          </div>
+          <div
+            ref={nextRef}
+            className="absolute top-1/2 right-2 z-10 -translate-y-1/2 cursor-pointer text-white bg-black/50 p-2 rounded-full hover:bg-black/70"
+          >
+            <FaChevronRight size={24} />
+          </div>
+        </Swiper>
+
+        {/* Thumbnails */}
+        <Swiper
+          onSwiper={setThumbsSwiper}
+          modules={[FreeMode, Thumbs]}
+          freeMode
+          watchSlidesProgress
+          slidesPerView="auto"
+          spaceBetween={10}
+          className="mt-4 max-w-6xl"
+        >
+          {images.map((img, index) => (
+            <SwiperSlide key={index} className="!w-28 cursor-pointer">
+              <img
+                src={img}
+                alt=""
+                className="h-16 w-full rounded-lg object-cover opacity-60 hover:opacity-100 transition"
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+    </div>,
+    document.body,
+  );
+}

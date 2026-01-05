@@ -1,0 +1,117 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+/* ---------------------------------- */
+/* DaisyUI Themes                     */
+/* ---------------------------------- */
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
+}
+
+/* ---------------------------------- */
+/* Global Transition                  */
+/* ---------------------------------- */
+* {
+  transition-property: all;
+  transition-timing-function: var(
+    --tw-ease,
+    var(--default-transition-timing-function)
+  );
+  transition-duration: 200ms;
+}
+
+/* ---------------------------------- */
+/* Design Tokens                      */
+/* ---------------------------------- */
+@theme {
+  /* Breakpoints */
+  --breakpoint-xxs: 21.25rem; /* 340px */
+  --breakpoint-xs: 23.125rem; /* 363px */
+  --breakpoint-xxl: 82.5rem; /* 1320px */
+
+  /* Brand Colors */
+  --color-picto-primary: #2563eb; /* Blue 600 */
+  --color-picto-primary-dark: #1e40af; /* Blue 800 */
+  --color-picto-accent: #22c55e; /* Green 500 */
+
+  /* Neutral */
+  --color-soft-white: #f8fafc;
+  --color-soft-dark: #64748b;
+
+  /* Backgrounds */
+  --color-bg-light: #ffffff;
+  --color-bg-dark: #020617;
+
+  /* Borders */
+  --color-border-light: #e5e7eb;
+  --color-border-dark: #1e293b;
+}
+
+/* ---------------------------------- */
+/* Buttons                            */
+/* ---------------------------------- */
+.btn-primary {
+  @apply bg-picto-primary text-white border-0
+         hover:bg-picto-primary-dark
+         hover:scale-[1.03]
+         transition-all duration-300;
+}
+
+/* ---------------------------------- */
+/* Typography                         */
+/* ---------------------------------- */
+body {
+  font-family: "Work Sans", sans-serif;
+  background-color: var(--color-bg-light);
+  color: #0f172a;
+}
+
+/* ---------------------------------- */
+/* Layout Helpers                     */
+/* ---------------------------------- */
+.content {
+  @apply max-xxl:w-full xxl:max-w-[1320px] xxl:mx-auto;
+}
+
+.section-title {
+  @apply font-medium md:font-semibold
+         text-3xl sm:text-4xl md:text-5xl;
+}
+
+.center {
+  @apply flex justify-center items-center;
+}
+
+/* ---------------------------------- */
+/* Decorative Backgrounds             */
+/* ---------------------------------- */
+.introduction-profile-background {
+  background: radial-gradient(
+      circle at 12% 100%,
+      rgba(34, 197, 94, 0.15),
+      transparent 20%
+    ),
+    radial-gradient(
+      circle at 95% -15%,
+      rgba(37, 99, 235, 0.25),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at center right,
+      rgba(14, 165, 233, 0.2),
+      transparent 35%
+    );
+}
+
+.blog-background {
+  background: radial-gradient(
+      circle at -10% 0%,
+      rgba(37, 99, 235, 0.2),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 110% 30%,
+      rgba(14, 165, 233, 0.25),
+      transparent 25%
+    );
+}
