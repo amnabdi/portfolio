@@ -62,7 +62,7 @@ const Introduction = () => {
         <div className="pt-13 me-31.5 w-full lg:w-auto">
           {/* Title */}
           <h1 className="text-3xl xxs:text-4xl sm:max-xl:text-5xl xl:text-6xl font-semibold">
-            Hello, I’m
+            Hello
             <span className="block">I’m Amin Abdi</span>
           </h1>
 
