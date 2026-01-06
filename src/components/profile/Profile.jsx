@@ -69,7 +69,7 @@ const Profile = () => {
           </div>
           <div className="mt-8 text-center ">
             <a
-              href="https://drive.google.com/file/d/1fEPixdETnzKz2zupoX5C0vyMgGpzGKmx/view"
+              href="https://drive.google.com/file/d/1W552UKQXpwFQuukDM4FaZr5iiQozKHc-/view?usp=drive_open"
               target="_blank"
               rel="noopener noreferrer"
               className="btn rounded-full xxs:btn-lg px-6 max-xs:px-2 xxs:py-3 hover:border-picto-primary bg-white duration-300 transition-all hover:text-picto-primary ms-4 text-xs xxs:text-[14px] sm:text-[16px]"
