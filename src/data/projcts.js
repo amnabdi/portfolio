@@ -119,30 +119,4 @@ export const projects = [
       "Swiper",
     ],
   },
-  {
-    id: 4,
-    title: "Sibitec",
-    role: "Frontend Developer",
-    outcome:
-      "A company site and news portal running on a shared Material UI design system.",
-    images: [sibitec],
-    highlights: [
-      "Built a scalable Next.js 14 platform using TypeScript, MUI, and Redux",
-      "Designed a custom Material UI design system for consistency",
-      "Implemented SSR and SEO optimization for performance and visibility",
-      "Integrated a CMS-driven news portal for content management",
-    ],
-    tech: [
-      "TypeScript",
-      "Next.js",
-      "Material UI",
-      "Redux",
-      "SSR",
-      "Leaflet",
-      "SEO Optimization",
-      "Swiper",
-    ],
-    url: "https://sibitec.ir",
-    linkName: "sibitec.ir",
-  },
 ];
