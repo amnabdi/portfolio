@@ -1,32 +1,30 @@
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FiArrowRight } from "react-icons/fi";
 
 const WorkTogether = () => {
   return (
-    <div className="py-25 max-w-169 mx-auto px-2">
-      <div className="text-center">
-        <p className="text-white md:font-semibold text-2xl sm:text-3xl md:text-5xl pb-8">
-          Do you have a Project Idea? Let's discuss your project!
+    <section className="border-t border-rule bg-surface-sunken py-section">
+      <div className="page text-center">
+        <h2 className="mx-auto max-w-2xl text-3xl">
+          Have a project in mind? Let&rsquo;s talk about it.
+        </h2>
+
+        <p className="mx-auto mt-5 max-w-xl text-ink-muted">
+          I&rsquo;m always open to discussing new projects and creative ideas. Let&rsquo;s
+          connect and build something worth shipping.
         </p>
-        <p className="text-[#A5ACB5] text-xs sm:text-lg font-normal text-center pb-8">
-          I'm always open to discussing new projects and creative ideas. Let's
-          connect and build something amazing together.
-        </p>
+
         <a
           href="https://t.me/+989119209012"
           target="_blank"
-          className="btn btn-primary px-4 md:px-6.5 py-3 md:py-6 text-[12px] md:text-[16px]"
+          rel="noopener noreferrer"
+          className="mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-medium text-canvas transition-colors duration-200 hover:bg-accent-hover"
         >
-          Let's work Together
-          <FontAwesomeIcon
-            icon={faArrowRight}
-            size="l"
-            style={{ color: "#FFFFFF" }}
-            className="ms-3"
-          />
+          Start a conversation
+          <FiArrowRight aria-hidden="true" />
+          <span className="sr-only">on Telegram (opens in a new tab)</span>
         </a>
       </div>
-    </div>
+    </section>
   );
 };
 

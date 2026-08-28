@@ -1,47 +1,67 @@
-// components/ExperienceCard.tsx
-import { MapPin } from "lucide-react";
+import { FiArrowUpRight, FiMapPin } from "react-icons/fi";
 
-export default function ExperienceCard({ data }) {
+const ExperienceCard = ({ data }) => {
+  const hasLink = Boolean(data.link);
+
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-      {/* Header */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-        <a href={data.link} target="_blank" rel="noopener noreferrer">
-          <div className="flex gap-4">
-            {/* Logo */}
-            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-gray-200 ">
-              <img
-                src={data.logo}
-                alt={data.company}
-                className="h-12 w-12 object-contain"
-              />
-            </div>
-
-            {/* Info */}
-            <div>
-              <h3 className="font-semibold text-green-700">{data.company}</h3>
-              <p className="font-medium text-slate-900">{data.role}</p>
-              <div className="mt-1 flex items-center gap-1 text-sm text-slate-500">
-                <MapPin className="h-4 w-4" />
-                {data.location}
-              </div>
-            </div>
-          </div>
-        </a>
-
-        {/* Date */}
-        <div className="text-sm text-slate-500 sm:text-right">
-          <p>{data.duration}</p>
-          <p className="mt-1 font-medium text-green-700">{data.period}</p>
-        </div>
+    <article className="grid gap-6 py-10 md:grid-cols-[minmax(0,14rem)_1fr] md:gap-12">
+      {/* Metadata rail — mono-set so it reads as data beside the prose. */}
+      <div className="flex gap-4 md:flex-col md:gap-3">
+        <img
+          src={data.logo}
+          alt=""
+          width={48}
+          height={48}
+          loading="lazy"
+          decoding="async"
+          className="h-12 w-12 shrink-0 rounded-lg border border-rule bg-surface object-contain p-1.5"
+        />
+        <dl className="font-mono text-xs text-ink-muted">
+          <dt className="sr-only">Dates</dt>
+          <dd>{data.duration}</dd>
+          <dt className="sr-only">Duration</dt>
+          <dd className="mt-1">{data.period}</dd>
+          <dt className="sr-only">Location</dt>
+          <dd className="mt-1 flex items-center gap-1.5">
+            <FiMapPin aria-hidden="true" />
+            {data.location}
+          </dd>
+        </dl>
       </div>
 
-      {/* Responsibilities */}
-      <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
-        {data.responsibilities.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </ul>
-    </div>
+      <div>
+        <h3 className="text-2xl">{data.role}</h3>
+
+        <p className="mt-1 text-sm text-ink-muted">
+          {hasLink ? (
+            <a
+              href={data.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-accent transition-colors duration-200 hover:text-accent-hover"
+            >
+              {data.company}
+              <FiArrowUpRight aria-hidden="true" />
+              <span className="sr-only">(opens in a new tab)</span>
+            </a>
+          ) : (
+            data.company
+          )}
+        </p>
+
+        <p className="prose-measure mt-4 text-ink-muted">{data.summary}</p>
+
+        <ul className="prose-measure mt-6 space-y-3 text-sm text-ink-muted">
+          {data.achievements.map((item) => (
+            <li key={item} className="flex gap-3">
+              <span aria-hidden="true" className="mt-2.5 h-px w-4 shrink-0 bg-accent" />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </article>
   );
-}
+};
+
+export default ExperienceCard;

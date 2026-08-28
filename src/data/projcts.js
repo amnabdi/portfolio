@@ -1,34 +1,36 @@
-// src/data/projects.ts
-import rasadnegar1 from "../assets/images/projects/rasadnegar/about_us.png";
-import rasadnegar2 from "../assets/images/projects/rasadnegar/category_page.png";
-import rasadnegar3 from "../assets/images/projects/rasadnegar/contact_us.png";
-import rasadnegar4 from "../assets/images/projects/rasadnegar/detail_page.png";
-import rasadnegar5 from "../assets/images/projects/rasadnegar/home.png";
-import rasadnegar6 from "../assets/images/projects/rasadnegar/home_with_navigation.png";
-import rasadnegar7 from "../assets/images/projects/rasadnegar/search.png";
-import rasadnegar8 from "../assets/images/projects/rasadnegar/gallery.png";
+import rasadnegar1 from "../assets/images/projects/rasadnegar/about_us.png?preset=screenshot";
+import rasadnegar2 from "../assets/images/projects/rasadnegar/category_page.png?preset=screenshot";
+import rasadnegar3 from "../assets/images/projects/rasadnegar/contact_us.png?preset=screenshot";
+import rasadnegar4 from "../assets/images/projects/rasadnegar/detail_page.png?preset=screenshot";
+import rasadnegar5 from "../assets/images/projects/rasadnegar/home.png?preset=screenshot";
+import rasadnegar6 from "../assets/images/projects/rasadnegar/home_with_navigation.png?preset=screenshot";
+import rasadnegar7 from "../assets/images/projects/rasadnegar/search.png?preset=screenshot";
+import rasadnegar8 from "../assets/images/projects/rasadnegar/gallery.png?preset=screenshot";
 //
-import iraninsurance1 from "../assets/images/projects/iranInsurance/insurance_detail_page.png";
-import iraninsurance2 from "../assets/images/projects/iranInsurance/iran_insurance.png";
-import iraninsurance3 from "../assets/images/projects/iranInsurance/main_page.png";
-import iraninsurance4 from "../assets/images/projects/iranInsurance/mybime.png";
-import iraninsurance5 from "../assets/images/projects/iranInsurance/q2316.png";
-import iraninsurance6 from "../assets/images/projects/iranInsurance/r5.png";
-import iraninsurance7 from "../assets/images/projects/iranInsurance/without_login.png";
+import iraninsurance1 from "../assets/images/projects/iranInsurance/insurance_detail_page.png?preset=screenshot";
+import iraninsurance2 from "../assets/images/projects/iranInsurance/iran_insurance.png?preset=screenshot";
+import iraninsurance3 from "../assets/images/projects/iranInsurance/main_page.png?preset=screenshot";
+import iraninsurance4 from "../assets/images/projects/iranInsurance/mybime.png?preset=screenshot";
+import iraninsurance5 from "../assets/images/projects/iranInsurance/q2316.png?preset=screenshot";
+import iraninsurance6 from "../assets/images/projects/iranInsurance/r5.png?preset=screenshot";
+import iraninsurance7 from "../assets/images/projects/iranInsurance/without_login.png?preset=screenshot";
 //
-import cms1 from "../assets/images/projects/cms/about_us.png";
-import cms2 from "../assets/images/projects/cms/add_page.png";
-import cms3 from "../assets/images/projects/cms/home.png";
-import cms4 from "../assets/images/projects/cms/home_grid.png";
-import cms5 from "../assets/images/projects/cms/modal.png";
-import cms6 from "../assets/images/projects/cms/navigation.png";
+import cms1 from "../assets/images/projects/cms/about_us.png?preset=screenshot";
+import cms2 from "../assets/images/projects/cms/add_page.png?preset=screenshot";
+import cms3 from "../assets/images/projects/cms/home.png?preset=screenshot";
+import cms4 from "../assets/images/projects/cms/home_grid.png?preset=screenshot";
+import cms5 from "../assets/images/projects/cms/modal.png?preset=screenshot";
+import cms6 from "../assets/images/projects/cms/navigation.png?preset=screenshot";
 
-import sibitec from "../assets/images/projects/sibitec/sibitec.png";
+import sibitec from "../assets/images/projects/sibitec/sibitec.png?preset=screenshot";
 
 export const projects = [
   {
     id: 1,
-    title: "Iran insurance",
+    title: "Iran Insurance",
+    role: "Frontend Developer",
+    outcome:
+      "A legacy insurance platform rebuilt as a secure, installable progressive web app.",
     images: [
       iraninsurance1,
       iraninsurance2,
@@ -60,6 +62,9 @@ export const projects = [
   {
     id: 2,
     title: "Rasadnegar News Platform",
+    role: "Frontend Developer",
+    outcome:
+      "A server-rendered news platform with a real-time, admin-configurable content layer.",
     images: [
       rasadnegar1,
       rasadnegar2,
@@ -93,6 +98,9 @@ export const projects = [
   {
     id: 3,
     title: "Enterprise News CMS",
+    role: "Frontend Developer",
+    outcome:
+      "A headless admin for a news portal, built on a reusable typed component layer.",
     images: [cms1, cms2, cms3, cms4, cms5, cms6],
     highlights: [
       "Built a headless CMS for a news portal using React and Vite",
@@ -114,6 +122,9 @@ export const projects = [
   {
     id: 4,
     title: "Sibitec",
+    role: "Frontend Developer",
+    outcome:
+      "A company site and news portal running on a shared Material UI design system.",
     images: [sibitec],
     highlights: [
       "Built a scalable Next.js 14 platform using TypeScript, MUI, and Redux",
@@ -131,6 +142,7 @@ export const projects = [
       "SEO Optimization",
       "Swiper",
     ],
+    url: "https://sibitec.ir",
     linkName: "sibitec.ir",
   },
 ];
