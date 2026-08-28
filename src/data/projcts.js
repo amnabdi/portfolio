@@ -1,4 +1,3 @@
-// src/data/projects.ts
 import rasadnegar1 from "../assets/images/projects/rasadnegar/about_us.png";
 import rasadnegar2 from "../assets/images/projects/rasadnegar/category_page.png";
 import rasadnegar3 from "../assets/images/projects/rasadnegar/contact_us.png";
@@ -28,7 +27,10 @@ import sibitec from "../assets/images/projects/sibitec/sibitec.png";
 export const projects = [
   {
     id: 1,
-    title: "Iran insurance",
+    title: "Iran Insurance",
+    role: "Frontend Developer",
+    outcome:
+      "A legacy insurance platform rebuilt as a secure, installable progressive web app.",
     images: [
       iraninsurance1,
       iraninsurance2,
@@ -60,6 +62,9 @@ export const projects = [
   {
     id: 2,
     title: "Rasadnegar News Platform",
+    role: "Frontend Developer",
+    outcome:
+      "A server-rendered news platform with a real-time, admin-configurable content layer.",
     images: [
       rasadnegar1,
       rasadnegar2,
@@ -93,6 +98,9 @@ export const projects = [
   {
     id: 3,
     title: "Enterprise News CMS",
+    role: "Frontend Developer",
+    outcome:
+      "A headless admin for a news portal, built on a reusable typed component layer.",
     images: [cms1, cms2, cms3, cms4, cms5, cms6],
     highlights: [
       "Built a headless CMS for a news portal using React and Vite",
@@ -114,6 +122,9 @@ export const projects = [
   {
     id: 4,
     title: "Sibitec",
+    role: "Frontend Developer",
+    outcome:
+      "A company site and news portal running on a shared Material UI design system.",
     images: [sibitec],
     highlights: [
       "Built a scalable Next.js 14 platform using TypeScript, MUI, and Redux",
@@ -131,6 +142,7 @@ export const projects = [
       "SEO Optimization",
       "Swiper",
     ],
+    url: "https://sibitec.ir",
     linkName: "sibitec.ir",
   },
 ];

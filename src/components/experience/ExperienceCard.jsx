@@ -36,9 +36,9 @@ export default function ExperienceCard({ data }) {
         </div>
       </div>
 
-      {/* Responsibilities */}
+      {/* Achievements */}
       <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
-        {data.responsibilities.map((item, index) => (
+        {data.achievements.map((item, index) => (
           <li key={index}>{item}</li>
         ))}
       </ul>
