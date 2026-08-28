@@ -1,10 +1,14 @@
 /**
- * Renders an imagetools `?preset=screenshot` import.
+ * Renders an imagetools `?preset=screenshot` import, which yields
+ * { sources: { webp: "<srcset>" }, img: { src, w, h } }.
  *
- * That preset yields { sources: { webp: "<srcset>" }, img: { src, w, h } }, so
- * modern browsers get WebP at the width they actually need while the original
- * PNG stays as the fallback. The intrinsic w/h are always emitted: they are
- * what stops each screenshot shifting the layout as it loads.
+ * The preset emits WebP only, so the <img> fallback is also WebP rather than
+ * the original PNG. That is deliberate: every browser has supported WebP since
+ * 2020, and shipping a second full set of PNGs would roughly triple the image
+ * payload for user agents that no longer exist.
+ *
+ * The intrinsic w/h are always emitted — they are what stops each screenshot
+ * shifting the layout as it loads.
  */
 const Picture = ({ image, alt, sizes, className = "", ...imgProps }) => {
   // Tolerate a plain string import so call sites work with or without the preset.
