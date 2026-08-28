@@ -5,7 +5,7 @@ import ScrollToTop from "../components/common/scrollToTop/ScrollToTop";
 
 const Main = () => {
   return (
-    <div data-theme={"light"} className="relative">
+    <div className="relative">
       <NavBar />
       <Outlet />
       <div className="bg-[#2A374A]">

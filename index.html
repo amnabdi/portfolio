@@ -2,23 +2,52 @@
 <html lang="en">
 
 <head>
-    <meta charset="hUTF-8" />
-    <link rel="icon" type="image/svg+xml" class="rounded-b-4xl w-8 text-white" href="/logo.svg" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/index.css">
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
 
-    <style>
-        /* Google font - Work Sans */
-        @import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
-    </style>
+    <title>Amin Abdi — Front-End Developer</title>
+    <meta name="description"
+        content="Front-End Developer in Tehran building performant, scalable web applications with React, Next.js and TypeScript. Enterprise platforms, design systems, and CMS-driven products." />
+    <meta name="author" content="Amin Abdi" />
 
-    <title>Amin Abdi</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Amin Abdi — Front-End Developer" />
+    <meta property="og:description"
+        content="Front-End Developer in Tehran building performant, scalable web applications with React, Next.js and TypeScript." />
+    <meta property="og:image" content="/logo.svg" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Amin Abdi — Front-End Developer" />
+    <meta name="twitter:description"
+        content="Front-End Developer in Tehran building performant, scalable web applications with React, Next.js and TypeScript." />
+
+    <meta name="theme-color" content="#fbfaf8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#14130f" media="(prefers-color-scheme: dark)" />
+
+    <!-- Resolve the theme before first paint so there is no flash of the wrong
+         one. Mirrors the logic in src/hooks/useTheme.js; keep the two in sync. -->
+    <script>
+        (function () {
+            try {
+                var stored = localStorage.getItem("theme");
+                var theme =
+                    stored === "light" || stored === "dark"
+                        ? stored
+                        : window.matchMedia("(prefers-color-scheme: dark)").matches
+                            ? "dark"
+                            : "light";
+                document.documentElement.setAttribute("data-theme", theme);
+            } catch (e) {
+                document.documentElement.setAttribute("data-theme", "light");
+            }
+        })();
+    </script>
 </head>
 
-<body class="">
-    <div id="root" class=""></div>
+<body>
+    <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    <script type="module" src="https://unpkg.com/cally"></script>
 </body>
 
 </html>
