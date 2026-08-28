@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { FiChevronLeft, FiChevronRight, FiX } from "react-icons/fi";
+import Picture from "../Picture";
 
 /**
  * Built on the native <dialog> element. showModal() gives focus trapping,
@@ -122,9 +123,10 @@ const Lightbox = ({ images, title, initialIndex = 0, onClose }) => {
         </div>
 
         <div className="relative">
-          <img
-            src={images[index]}
+          <Picture
+            image={images[index]}
             alt={`${title} — screenshot ${index + 1} of ${images.length}`}
+            sizes="(min-width: 1280px) 1152px, 100vw"
             className="mx-auto max-h-[75vh] w-auto rounded-lg object-contain"
           />
 
@@ -153,7 +155,7 @@ const Lightbox = ({ images, title, initialIndex = 0, onClose }) => {
         {hasMultiple && (
           <ul className="flex flex-wrap justify-center gap-2">
             {images.map((image, thumbIndex) => (
-              <li key={image}>
+              <li key={thumbIndex}>
                 <button
                   type="button"
                   onClick={() => setIndex(thumbIndex)}
@@ -165,7 +167,7 @@ const Lightbox = ({ images, title, initialIndex = 0, onClose }) => {
                       : "opacity-50 hover:opacity-100"
                   }`}
                 >
-                  <img src={image} alt="" className="h-full w-full object-cover" />
+                  <Picture image={image} alt="" sizes="80px" className="h-full w-full object-cover" />
                 </button>
               </li>
             ))}

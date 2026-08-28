@@ -1,12 +1,5 @@
 @import "tailwindcss";
 
-/* daisyUI is still installed but the redesigned components no longer use its
-   component classes. Kept here so any not-yet-migrated section keeps rendering;
-   removed once nothing depends on it. */
-@plugin "daisyui" {
-  themes: light --default, dark;
-}
-
 /* ---------------------------------- */
 /* Theme palettes                     */
 /* ---------------------------------- */

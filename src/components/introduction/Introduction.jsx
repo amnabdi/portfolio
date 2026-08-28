@@ -1,8 +1,9 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaTelegram, FaWhatsapp } from "react-icons/fa";
 import { FiMapPin } from "react-icons/fi";
+import Picture from "../common/Picture";
 
-import aminabdi from "../../assets/aminabdi.jpg";
+import aminabdi from "../../assets/aminabdi.jpg?preset=screenshot";
 import "./introduction.css";
 
 const SOCIAL_LINKS = [
@@ -87,11 +88,10 @@ const Introduction = () => {
           transition={{ duration: 0.6 }}
           className="order-1 mx-auto w-full max-w-sm lg:order-2 lg:max-w-none"
         >
-          <img
-            src={aminabdi}
+          <Picture
+            image={aminabdi}
             alt="Amin Abdi"
-            width={679}
-            height={716}
+            sizes="(min-width: 1024px) 416px, (min-width: 640px) 384px, 100vw"
             fetchPriority="high"
             decoding="async"
             className="aspect-square w-full rounded-2xl border border-rule object-cover"

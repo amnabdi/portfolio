@@ -1,5 +1,6 @@
-import aboutImage from "../../assets/AboutImage.png";
+import aboutImage from "../../assets/AboutImage.png?preset=screenshot";
 import CvButton from "../common/CvButton";
+import Picture from "../common/Picture";
 
 const STRENGTHS = [
   "Building scalable, high-performing web apps with React and Next.js",
@@ -44,11 +45,10 @@ const Profile = () => {
           </div>
 
           <figure className="lg:sticky lg:top-28 lg:self-start">
-            <img
-              src={aboutImage}
+            <Picture
+              image={aboutImage}
               alt="Illustration of Amin Abdi working at a desk with a laptop and two code editors open"
-              width={1536}
-              height={1024}
+              sizes="(min-width: 1024px) 384px, 100vw"
               loading="lazy"
               decoding="async"
               className="aspect-[3/2] w-full rounded-2xl border border-rule object-cover"

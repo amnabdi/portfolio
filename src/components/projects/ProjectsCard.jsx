@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FiArrowUpRight } from "react-icons/fi";
 import Lightbox from "../common/lightbox/Lightbox";
+import Picture from "../common/Picture";
 
 const ProjectCard = ({ data }) => {
   const [lightboxIndex, setLightboxIndex] = useState(null);
@@ -23,9 +24,10 @@ const ProjectCard = ({ data }) => {
         aria-label={`View ${title} screenshots`}
         className="mt-8 block w-full overflow-hidden rounded-2xl border border-rule"
       >
-        <img
-          src={leadImage}
+        <Picture
+          image={leadImage}
           alt={`${title} — main screen`}
+          sizes="(min-width: 1024px) 1024px, 100vw"
           loading="lazy"
           decoding="async"
           className="aspect-[16/10] w-full object-cover object-top transition-transform duration-300 hover:scale-[1.02]"
@@ -95,16 +97,17 @@ const ProjectCard = ({ data }) => {
       {remainingImages.length > 0 && (
         <ul className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {remainingImages.map((image, offset) => (
-            <li key={image}>
+            <li key={offset}>
               <button
                 type="button"
                 onClick={() => setLightboxIndex(offset + 1)}
                 aria-label={`View ${title} screenshot ${offset + 2}`}
                 className="block w-full overflow-hidden rounded-lg border border-rule"
               >
-                <img
-                  src={image}
+                <Picture
+                  image={image}
                   alt={`${title} — screenshot ${offset + 2}`}
+                  sizes="(min-width: 1024px) 260px, (min-width: 640px) 33vw, 50vw"
                   loading="lazy"
                   decoding="async"
                   className="aspect-[16/10] w-full object-cover object-top opacity-85 transition-opacity duration-200 hover:opacity-100"
