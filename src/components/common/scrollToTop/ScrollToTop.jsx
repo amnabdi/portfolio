@@ -1,39 +1,37 @@
 import { useEffect, useState } from "react";
-import { faAngleUp } from "@fortawesome/free-solid-svg-icons";
-import { animateScroll } from "react-scroll";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-const scrollToTop = () => {
-  animateScroll.scrollToTop(options); /* To Top */
-  //   animateScroll.scrollToBottom(options); /* To Bottom */
-};
-
-const options = {
-  duration: 500,
-  smooth: true,
-};
+import { FiArrowUp } from "react-icons/fi";
 
 const ScrollToTop = () => {
-  const [position, setPosition] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setPosition(window.scrollY);
-    };
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => setIsVisible(window.scrollY > 400);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const scrollToTop = () => {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
+  };
+
+  // Unmounted rather than scaled to zero, so it leaves the tab order and the
+  // accessibility tree entirely while inactive.
+  if (!isVisible) return null;
+
   return (
-    <div className="flex justify-end relative  sm:me-10 z-10 transition-all">
-      <a
-        onClick={scrollToTop}
-        className={`fixed bottom-10 me-5 w-10 h-10 sm:w-12.5 sm:h-12.5 lg:w-15 lg:h-15 flex justify-center items-center rounded-full transition delay-150 duration-500 ease-in-out hover:scale-120 hover:cursor-pointer bg-picto-primary hover:bg-picto-primary-dark text-white ${
-          position < 200 && "scale-0"
-        }`}
-      >
-        <FontAwesomeIcon icon={faAngleUp} size="2xl" />
-      </a>
-    </div>
+    <button
+      type="button"
+      onClick={scrollToTop}
+      aria-label="Scroll back to top"
+      className="fixed bottom-8 right-5 z-40 inline-flex h-11 w-11 items-center justify-center rounded-full bg-accent text-canvas shadow-lg transition-colors duration-200 hover:bg-accent-hover sm:right-8"
+    >
+      <FiArrowUp size={20} aria-hidden="true" />
+    </button>
   );
 };
 

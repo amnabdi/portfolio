@@ -115,7 +115,9 @@ html {
   scroll-behavior: smooth;
 }
 
-.scroll-anchor {
+/* Anchor targets clear the sticky header. :where() keeps specificity at zero so
+   a component can always override it. */
+:where([id]) {
   scroll-margin-top: 6rem;
 }
 

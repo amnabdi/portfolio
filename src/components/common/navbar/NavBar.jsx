@@ -1,113 +1,123 @@
-import { useEffect, useState } from "react";
-import logo from "../../../assets/logo.png";
-import { Link } from "react-scroll";
-import { LuCodeXml } from "react-icons/lu";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useRef, useState } from "react";
+import { FiMenu, FiX } from "react-icons/fi";
+import { useScrollSpy } from "../../../hooks/useScrollSpy";
+import ThemeToggle from "../themeToggle/ThemeToggle";
+import CvButton from "../CvButton";
 
-const navItems = [
-  { id: 1, name: "Home", url: "introduction" },
-  { id: 2, name: "About", url: "profile" },
-  { id: 3, name: "skills", url: "skills" },
-  { id: 4, name: "experience", url: "experience" },
-  { id: 5, name: "projects", url: "projects" },
-  { id: 6, name: "contact", url: "contact" },
+const NAV_ITEMS = [
+  { id: "introduction", label: "Home" },
+  { id: "profile", label: "About" },
+  { id: "skills", label: "Skills" },
+  { id: "experience", label: "Experience" },
+  { id: "projects", label: "Projects" },
+  { id: "contact", label: "Contact" },
 ];
 
-const handleMenuClick = () => {
-  if (document.activeElement instanceof HTMLElement) {
-    document.activeElement.blur();
-  }
-};
-
-const menu = navItems.map((item) => (
-  <li key={item.id} onMouseDown={(e) => e.preventDefault()}>
-    <Link
-      onClick={handleMenuClick}
-      to={item.url.toLowerCase()}
-      smooth={true}
-      duration={1000}
-      spy={true}
-      offset={-140}
-      activeStyle={{
-        backgroundColor: "#1e40af",
-        color: "white",
-      }}
-      className={`hover:text-picto-primary px-5 py-3 mx-1`}
-    >
-      {item.name}
-    </Link>
-  </li>
-));
+// Stable reference so the observer in useScrollSpy is not torn down each render.
+const SECTION_IDS = NAV_ITEMS.map((item) => item.id);
 
 const NavBar = () => {
-  const [position, setPosition] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const triggerRef = useRef(null);
+  const activeId = useScrollSpy(SECTION_IDS);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setPosition(window.scrollY);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Escape closes the mobile menu and returns focus to the button that opened it.
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const handleKeyDown = (event) => {
+      if (event.key !== "Escape") return;
+      setIsMenuOpen(false);
+      triggerRef.current?.focus();
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isMenuOpen]);
+
   return (
-    <div
-      className={`sticky top-0  ${
-        position > 50
-          ? "bg-soft-white border-b border-gray-300"
-          : "bg-white border-white"
-      } z-50 transition-all duration-1000`}
+    <header
+      className={`sticky top-0 z-50 bg-canvas transition-colors duration-300 ${
+        isScrolled ? "border-b border-rule" : "border-b border-transparent"
+      }`}
     >
-      <div className="navbar flex justify-between mx-auto content">
-        <div className="flex items-center justify-between">
-          <div className="dropdown">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost lg:hidden"
-            ></div>
-            <ul
-              tabIndex={0}
-              className={`menu menu-lg dropdown-content rounded-box z-1 mt-3 w-lvw p-2 shadow font-semibold flex-nowrap bg-white text-black`}
-            >
-              {menu}
-            </ul>
-          </div>
+      <nav aria-label="Main" className="page flex items-center justify-between gap-4 py-4">
+        <a
+          href="#introduction"
+          className="font-display text-2xl leading-none tracking-tight text-ink"
+        >
+          Amin Abdi
+        </a>
 
-          <Link
-            href="#introduction"
-            to={`introduction`}
-            smooth={true}
-            duration={900}
-            className="flex items-center border-0 lg:max-xxl:ps-5"
+        <ul className="hidden items-center gap-1 lg:flex">
+          {NAV_ITEMS.map((item) => {
+            const isActive = activeId === item.id;
+            return (
+              <li key={item.id}>
+                <a
+                  href={`#${item.id}`}
+                  aria-current={isActive ? "true" : undefined}
+                  className={`rounded px-3 py-2 text-sm transition-colors duration-200 hover:text-accent ${
+                    isActive ? "text-accent" : "text-ink-muted"
+                  }`}
+                >
+                  {item.label}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <CvButton className="max-sm:hidden" />
+
+          <button
+            ref={triggerRef}
+            type="button"
+            onClick={() => setIsMenuOpen((open) => !open)}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-nav"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-rule text-ink transition-colors duration-200 hover:border-accent hover:text-accent lg:hidden"
           >
-            <LuCodeXml size={30} />
-            <p className="text-2xl sm:text-[32px] my-auto ms-[12px] font-semibold">
-              Amin Abdi
-            </p>
-          </Link>
+            {isMenuOpen ? <FiX size={20} /> : <FiMenu size={20} />}
+          </button>
         </div>
+      </nav>
 
-        <div className="lg:flex items-center">
-          <ul className="hidden lg:flex menu menu-horizontal text-[16px] font-medium md:shrink-0">
-            {menu}
+      {isMenuOpen && (
+        <div id="mobile-nav" className="border-t border-rule bg-canvas lg:hidden">
+          <ul className="page flex flex-col py-2">
+            {NAV_ITEMS.map((item) => (
+              <li key={item.id}>
+                <a
+                  href={`#${item.id}`}
+                  onClick={() => setIsMenuOpen(false)}
+                  aria-current={activeId === item.id ? "true" : undefined}
+                  className={`block py-3 text-base transition-colors duration-200 hover:text-accent ${
+                    activeId === item.id ? "text-accent" : "text-ink"
+                  }`}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+            <li className="pt-3 pb-2 sm:hidden">
+              <CvButton />
+            </li>
           </ul>
-          <p className="">
-            <a
-              href="https://drive.google.com/file/d/1W552UKQXpwFQuukDM4FaZr5iiQozKHc-/view?usp=drive_open"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn rounded-full xxs:btn-lg px-6 max-xs:px-2 xxs:py-3 hover:border-picto-primary bg-white duration-300 transition-all hover:text-picto-primary ms-4 text-xs xxs:text-[14px] sm:text-[16px]"
-            >
-              <FontAwesomeIcon icon={faDownload} /> Download CV
-            </a>
-          </p>
         </div>
-      </div>
-    </div>
+      )}
+    </header>
   );
 };
 
