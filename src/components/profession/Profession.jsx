@@ -1,94 +1,135 @@
+import { useEffect, useRef, useState } from "react";
 import {
-  FaEnvelope,
-  FaPhone,
   FaGithub,
   FaLinkedin,
-  FaWhatsapp,
   FaTelegram,
+  FaWhatsapp,
 } from "react-icons/fa";
-import { FiCopy } from "react-icons/fi";
+import { FiCheck, FiCopy, FiMail, FiPhone } from "react-icons/fi";
+
+const CONTACT_METHODS = [
+  {
+    id: "email",
+    label: "Email address",
+    icon: FiMail,
+    display: "aminabdidev@gmail.com",
+    value: "aminabdidev@gmail.com",
+    href: "mailto:aminabdidev@gmail.com",
+  },
+  {
+    id: "phone",
+    label: "Phone number",
+    icon: FiPhone,
+    display: "+98 911 920 9012",
+    value: "+989119209012",
+    href: "tel:+989119209012",
+  },
+];
+
+const SOCIAL_LINKS = [
+  { id: "github", label: "GitHub", icon: FaGithub, url: "https://github.com/amnabdi" },
+  {
+    id: "linkedin",
+    label: "LinkedIn",
+    icon: FaLinkedin,
+    url: "https://www.linkedin.com/in/amin-abdi-9963a0226/",
+  },
+  { id: "whatsapp", label: "WhatsApp", icon: FaWhatsapp, url: "https://wa.me/9119209012" },
+  { id: "telegram", label: "Telegram", icon: FaTelegram, url: "https://t.me/+989119209012" },
+];
 
 const Profession = () => {
-  const copyToClipboard = (text) => {
-    navigator.clipboard.writeText(text);
-  };
-  return (
-    <div id="contact">
-      <section className="py-10 text-center">
-        {/* Badge */}
-        <div className="mb-6">
-          <span className="inline-block rounded-full bg-white px-4 py-1 text-sm font-medium text-gray-700">
-            Get In Touch
-          </span>
-        </div>
+  const [copiedId, setCopiedId] = useState(null);
+  const [status, setStatus] = useState("");
+  const timeoutRef = useRef(null);
 
-        {/* Text */}
-        <p className="mx-auto px-1.5 max-w-xl text-gray-600">
-          What’s next? Feel free to reach out to me if you’re looking for a
-          developer, have a query, or simply want to connect.
+  useEffect(() => () => clearTimeout(timeoutRef.current), []);
+
+  const handleCopy = async (method) => {
+    try {
+      await navigator.clipboard.writeText(method.value);
+      setCopiedId(method.id);
+      setStatus(`${method.label} copied to clipboard`);
+    } catch {
+      setStatus(`Could not copy the ${method.label.toLowerCase()}`);
+    }
+
+    clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      setCopiedId(null);
+      setStatus("");
+    }, 2500);
+  };
+
+  return (
+    <section id="contact" className="border-t border-rule py-section">
+      <div className="page">
+        <h2 className="text-3xl">Get in touch</h2>
+
+        <p className="prose-measure mt-4 text-lg text-ink-muted">
+          Looking for a developer, have a question, or just want to connect? Reach out
+          on any of these.
         </p>
 
-        {/* Contact Info */}
-        <div className="mt-10 space-y-5 text-lg font-semibold text-gray-900">
-          {/* Email */}
-          <div className="flex items-center justify-center gap-3">
-            <FaEnvelope className="text-gray-500" />
-            <span>aminabdidev@gmail.com</span>
-            <button
-              onClick={() => copyToClipboard("aminabdidev@gmail.com")}
-              className="text-gray-400 hover:text-gray-700 transition cursor-pointer"
-            >
-              <FiCopy />
-            </button>
-          </div>
+        <ul className="mt-10 space-y-4">
+          {CONTACT_METHODS.map((method) => {
+            const Icon = method.icon;
+            const isCopied = copiedId === method.id;
 
-          {/* Phone */}
-          <div className="flex items-center justify-center gap-3">
-            <FaPhone className="text-gray-500" />
-            <span dir="ltr">+98 911 920 9012</span>
-            <button
-              onClick={() => copyToClipboard("+989119209012")}
-              className="text-gray-400 hover:text-gray-700 transition cursor-pointer"
-            >
-              <FiCopy />
-            </button>
-          </div>
-        </div>
+            return (
+              <li key={method.id} className="flex items-center gap-3">
+                <Icon aria-hidden="true" className="shrink-0 text-ink-muted" />
+                <a
+                  href={method.href}
+                  dir="ltr"
+                  className="text-lg transition-colors duration-200 hover:text-accent"
+                >
+                  {method.display}
+                </a>
+                <button
+                  type="button"
+                  onClick={() => handleCopy(method)}
+                  aria-label={`Copy ${method.label.toLowerCase()}`}
+                  className="inline-flex h-8 w-8 items-center justify-center rounded-full text-ink-muted transition-colors duration-200 hover:bg-accent-soft hover:text-accent"
+                >
+                  {isCopied ? (
+                    <FiCheck aria-hidden="true" className="text-accent" />
+                  ) : (
+                    <FiCopy aria-hidden="true" />
+                  )}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
 
-        {/* Socials */}
-        <div className="mt-16">
-          <p className="mb-5 text-sm text-gray-500">
-            You may also find me on these platforms!
-          </p>
-          <div className="flex justify-center gap-6 text-xl text-gray-400">
-            <a
-              href="https://github.com/amnabdi"
-              className="hover:text-gray-900 transition"
-            >
-              <FaGithub />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/amin-abdi-9963a0226/"
-              className="hover:text-gray-900 transition"
-            >
-              <FaLinkedin />
-            </a>
-            <a
-              href="https://wa.me/9119209012"
-              className="hover:text-gray-900 transition"
-            >
-              <FaWhatsapp />
-            </a>
-            <a
-              href="https://t.me/+989119209012"
-              className="hover:text-gray-900 transition"
-            >
-              <FaTelegram />
-            </a>
-          </div>
+        {/* Copying is otherwise a silent action — this announces the result. */}
+        <p role="status" aria-live="polite" className="sr-only">
+          {status}
+        </p>
+
+        <div className="mt-12">
+          <h3 className="text-sm font-medium tracking-wide text-ink-muted uppercase">
+            Elsewhere
+          </h3>
+          <ul className="mt-4 flex gap-4">
+            {SOCIAL_LINKS.map(({ id, label, icon: Icon, url }) => (
+              <li key={id}>
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-rule text-ink-muted transition-colors duration-200 hover:border-accent hover:text-accent"
+                >
+                  <Icon size={18} aria-hidden="true" />
+                  <span className="sr-only">{label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 

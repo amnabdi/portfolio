@@ -149,14 +149,6 @@ html {
   max-width: var(--container-prose);
 }
 
-/* Transitional: sections not yet migrated still reference this. Removed with
-   the commit that rewrites its last consumer. */
-.btn-primary {
-  background-color: var(--accent);
-  color: var(--canvas);
-  border: 0;
-}
-
 /* ---------------------------------- */
 /* Motion                             */
 /* ---------------------------------- */

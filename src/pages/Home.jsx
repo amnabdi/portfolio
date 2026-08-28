@@ -14,9 +14,7 @@ const Home = () => {
       <WorkProcess />
       <Experience />
       <Projects />
-      <div className="bg-gray-900">
-        <WorkTogether />
-      </div>
+      <WorkTogether />
       <Profession />
     </>
   );
