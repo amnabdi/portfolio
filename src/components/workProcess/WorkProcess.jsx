@@ -1,66 +1,58 @@
-import { FaHtml5, FaCss3Alt, FaReact, FaGitAlt } from "react-icons/fa";
+import { FaCss3Alt, FaGitAlt, FaHtml5, FaReact } from "react-icons/fa";
 import {
   SiJavascript,
-  SiTypescript,
+  SiMui,
   SiNextdotjs,
+  SiNpm,
+  SiReactquery,
   SiRedux,
   SiTailwindcss,
-  SiNpm,
+  SiTypescript,
 } from "react-icons/si";
-import { TbApi } from "react-icons/tb";
+import { TbApi, TbDeviceMobileCode, TbTopologyStar3 } from "react-icons/tb";
 import { MdOutlineDevices } from "react-icons/md";
-import { TbDeviceMobileCode } from "react-icons/tb";
 
-const skills = [
-  { id: 1, name: "HTML", icon: FaHtml5, color: "#E44D26" },
-  { id: 2, name: "CSS", icon: FaCss3Alt, color: "#1572B6" },
-  { id: 3, name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
-  { id: 4, name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
-  { id: 5, name: "React.js", icon: FaReact, color: "#61DAFB" },
-  { id: 6, name: "Next.js", icon: SiNextdotjs, color: "#000000" },
-  { id: 7, name: "PWA", icon: MdOutlineDevices, color: "#6366F1" },
-  { id: 8, name: "REST APIs", icon: TbApi, color: "#111827" },
-  { id: 9, name: "React Query", icon: FaReact, color: "#F97316" },
-  { id: 10, name: "Design Pattern", icon: SiJavascript, color: "#0F766E" },
-  { id: 11, name: "Redux", icon: SiRedux, color: "#764ABC" },
-  { id: 12, name: "Material UI", icon: SiTailwindcss, color: "#0284C7" },
-  { id: 13, name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
-  {
-    id: 14,
-    name: "Responsive & Adaptive Design",
-    icon: TbDeviceMobileCode,
-    color: "#6B7280",
-  },
-  { id: 15, name: "npm", icon: SiNpm, color: "#CB0001" },
-  { id: 16, name: "Git", icon: FaGitAlt, color: "#F05033" },
+const SKILLS = [
+  { id: "html", name: "HTML", icon: FaHtml5 },
+  { id: "css", name: "CSS", icon: FaCss3Alt },
+  { id: "javascript", name: "JavaScript", icon: SiJavascript },
+  { id: "typescript", name: "TypeScript", icon: SiTypescript },
+  { id: "react", name: "React", icon: FaReact },
+  { id: "next", name: "Next.js", icon: SiNextdotjs },
+  { id: "pwa", name: "PWA", icon: MdOutlineDevices },
+  { id: "rest", name: "REST APIs", icon: TbApi },
+  { id: "react-query", name: "React Query", icon: SiReactquery },
+  { id: "patterns", name: "Design Patterns", icon: TbTopologyStar3 },
+  { id: "redux", name: "Redux", icon: SiRedux },
+  { id: "mui", name: "Material UI", icon: SiMui },
+  { id: "tailwind", name: "Tailwind CSS", icon: SiTailwindcss },
+  { id: "responsive", name: "Responsive Design", icon: TbDeviceMobileCode },
+  { id: "npm", name: "npm", icon: SiNpm },
+  { id: "git", name: "Git", icon: FaGitAlt },
 ];
+
 const WorkProcess = () => {
   return (
-    <section id="skills" className="py-16">
-      <div className="max-w-5xl mx-auto px-4 text-center">
-        {/* برچسب بالا */}
-
-        <p className="text-3xl font-medium text-gray-500">Skills</p>
-
-        {/* توضیح کوتاه */}
-        <p className="mt-4 text-xl text-slate-500">
-          The skills, tools and technologies I am really good at:
+    <section id="skills" className="border-t border-rule py-section">
+      <div className="page">
+        <h2 className="text-3xl">Skills</h2>
+        <p className="prose-measure mt-4 text-lg text-ink-muted">
+          The tools and technologies I reach for most.
         </p>
 
-        {/* آیکون‌ها */}
-        <div className="mt-10 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-4 gap-6 sm:gap-8 place-items-center">
-          {skills.map((skill) => {
-            const Icon = skill.icon;
-            return (
-              <div key={skill.id} className="flex flex-col items-center gap-2">
-                <Icon className="text-6xl " style={{ color: skill.color }} />
-                <span className="text-xs sm:text-sm text-slate-500">
-                  {skill.name}
-                </span>
-              </div>
-            );
-          })}
-        </div>
+        {/* Icons are monochrome by default so sixteen vendor brand colours stop
+            competing with the palette; colour returns on hover and focus. */}
+        <ul className="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+          {SKILLS.map(({ id, name, icon: Icon }) => (
+            <li key={id} className="group flex flex-col items-center gap-3 text-center">
+              <Icon
+                aria-hidden="true"
+                className="text-4xl text-ink-muted transition-colors duration-200 group-hover:text-accent"
+              />
+              <span className="text-sm text-ink-muted">{name}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
