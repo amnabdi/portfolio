@@ -20,10 +20,6 @@ const Home = () => {
         <WorkTogether />
       </div>
       <Profession />
-
-      {/* <HappyClients />
-      <Testimonial /> */}
-      {/* <Contact /> */}
     </>
   );
 };
