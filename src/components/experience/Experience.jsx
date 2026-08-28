@@ -3,15 +3,13 @@ import ExperienceCard from "./ExperienceCard";
 
 const Experience = () => {
   return (
-    <section id="experience" className="py-16">
-      <div className="max-w-5xl mx-auto px-4">
-        <h2 className="text-xl text-gray-500 sm:text-2xl font-semibold text-center tracking-tight">
-          Experience
-        </h2>
+    <section id="experience" className="border-t border-rule py-section">
+      <div className="page">
+        <h2 className="text-3xl">Experience</h2>
 
-        <div className="mt-8 space-y-6">
-          {experiences?.map((exp) => (
-            <ExperienceCard key={exp.id} data={exp} />
+        <div className="mt-6 divide-y divide-rule">
+          {experiences.map((experience) => (
+            <ExperienceCard key={experience.id} data={experience} />
           ))}
         </div>
       </div>
