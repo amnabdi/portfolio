@@ -9,10 +9,8 @@ import Profession from "../components/profession/Profession";
 const Home = () => {
   return (
     <>
-      <div className="content">
-        <Introduction />
-        <Profile />
-      </div>
+      <Introduction />
+      <Profile />
       <WorkProcess />
       <Experience />
       <Projects />

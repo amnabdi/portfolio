@@ -149,15 +149,8 @@ html {
   max-width: var(--container-prose);
 }
 
-/* Transitional: sections not yet migrated still reference these. Each rule is
-   deleted with the commit that rewrites its last consumer. */
-.content {
-  width: 100%;
-  max-width: var(--container-page);
-  margin-inline: auto;
-  padding-inline: 1.25rem;
-}
-
+/* Transitional: sections not yet migrated still reference this. Removed with
+   the commit that rewrites its last consumer. */
 .btn-primary {
   background-color: var(--accent);
   color: var(--canvas);
