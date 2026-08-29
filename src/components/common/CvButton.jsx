@@ -1,7 +1,8 @@
 import { FiDownload } from "react-icons/fi";
 
-const CV_URL =
-  "https://drive.google.com/file/d/1W552UKQXpwFQuukDM4FaZr5iiQozKHc-/view?usp=drive_open";
+// Served from public/. BASE_URL keeps this correct whether the site is hosted
+// at a domain root or under a GitHub Pages subpath.
+const CV_URL = `${import.meta.env.BASE_URL}amin-abdi-resume.pdf`;
 
 /**
  * Single source of truth for the CV link, which was previously copy-pasted
@@ -16,13 +17,12 @@ const CvButton = ({ className = "", variant = "outline" }) => {
   return (
     <a
       href={CV_URL}
-      target="_blank"
-      rel="noopener noreferrer"
+      download="Amin-Abdi-CV.pdf"
       className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-colors duration-200 ${styles} ${className}`}
     >
       <FiDownload aria-hidden="true" />
       Download CV
-      <span className="sr-only">(opens in a new tab)</span>
+      <span className="sr-only">(PDF)</span>
     </a>
   );
 };
