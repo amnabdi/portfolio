@@ -2,7 +2,9 @@ import { FiDownload } from "react-icons/fi";
 
 // Served from public/. BASE_URL keeps this correct whether the site is hosted
 // at a domain root or under a GitHub Pages subpath.
-const CV_URL = `${import.meta.env.BASE_URL}amin-abdi-resume.pdf`;
+const CV_URL = `${
+  import.meta.env.BASE_URL
+}Amin Abdi-Front-End Developer-Resume.pdf`;
 
 /**
  * Single source of truth for the CV link, which was previously copy-pasted
